@@ -96,6 +96,7 @@
   }
 }
 
+#pragma mark - Helper Methods
 - (void)signupFailed
 {
   self.view.userInteractionEnabled = YES;
@@ -103,6 +104,14 @@
 
 - (void)createGame
 {
-  [ApiCalls createGameForCurrentUser];
+  [[[UIAlertView alloc] initWithTitle:@"Success" message:@"SignUp Successful" delegate:self cancelButtonTitle:@"Create Game" otherButtonTitles:nil] show];
 }
+
+#pragma mark - AlertView Delegate Methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  [ApiCalls createGameForCurrentUser];  
+}
+
 @end
