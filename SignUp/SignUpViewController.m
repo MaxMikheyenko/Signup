@@ -15,23 +15,6 @@
 
 @implementation SignUpViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-  //populates fields with test data
-//  self.userName.text = @"user";
-//  self.email.text = @"user@user.use";
-//  self.password.text = @"pass";
-//  self.confirmPassword.text = @"pass";
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
