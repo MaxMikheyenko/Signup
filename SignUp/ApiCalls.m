@@ -22,16 +22,20 @@
   [request setRequestMethod:@"POST"];
   [request addPostValue:email forKey:@"email"];
   [request addPostValue:password forKey:@"password"];
-  [request addPostValue:userName forKey:@"username"];
+  [request addPostValue:userName forKey:@"user_name"];
+  [request addPostValue:@"12345678" forKey:@"device_token"];
   
   ASIFormDataRequest *weakRequest = request;
   [request setCompletionBlock:^{
+    NSLog(@"complete");
     NSDictionary *responseData = [[JSONDecoder decoder] parseJSONData:weakRequest.responseData];
+    NSLog(@"response: %@", responseData);
     [User createUserWithDictionary:responseData];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupSuccessful" object:nil];
   }];
   
   [request setFailedBlock:^{
+    NSLog(@"status: %i", weakRequest.responseStatusCode);
     NSLog(@"error: %@", weakRequest.responseStatusMessage);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupFailed" object:nil];
   }];
