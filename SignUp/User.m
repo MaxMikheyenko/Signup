@@ -29,7 +29,7 @@
   User *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:appDelegate.managedObjectContext];
   
   user.userName = [userData objectForKey:@"user_name"];
-  user.userId = [userData objectForKey:@"user_id"];
+  user.userId = [NSNumber numberWithInteger:[[userData objectForKey:@"user_id"] integerValue]];
   user.userEmail = [userData objectForKey:@"user_email"];
   user.accessToken = [userData objectForKey:@"access_token"];
   

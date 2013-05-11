@@ -27,16 +27,32 @@
   
   ASIFormDataRequest *weakRequest = request;
   [request setCompletionBlock:^{
-    NSLog(@"complete");
     NSDictionary *responseData = [[JSONDecoder decoder] parseJSONData:weakRequest.responseData];
     NSLog(@"response: %@", responseData);
-    [User createUserWithDictionary:responseData];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupSuccessful" object:nil];
-  }];
+    
+    if([[responseData objectForKey:@"code"] integerValue] == 106)
+    {
+      [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Email Already Exists" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupFailed" object:nil];
+      return;
+    }
+
+    if([[responseData objectForKey:@"code"] integerValue] == 202)
+    {
+      [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Username Already Taken" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupFailed" object:nil];
+      return;
+    }
+
+    if([[responseData objectForKey:@"status"] isEqualToString:@"success"])
+    {
+      [User createUserWithDictionary:responseData];
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupSuccessful" object:nil];
+    }
+    }];
   
   [request setFailedBlock:^{
-    NSLog(@"status: %i", weakRequest.responseStatusCode);
-    NSLog(@"error: %@", weakRequest.responseStatusMessage);
+    [[[UIAlertView alloc] initWithTitle:@"Error" message:@"SignUp Failed" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupFailed" object:nil];
   }];
   
@@ -59,7 +75,21 @@
   ASIFormDataRequest *weakRequest = request;
   [request setCompletionBlock:^{
     NSDictionary *responseData = [[JSONDecoder decoder] parseJSONData:weakRequest.responseData];
-    [User setGameId:[responseData objectForKey:@"game_id"]];
+    int statusCode = [[responseData objectForKey:@"code"] integerValue];
+    
+    switch (statusCode) {
+      case 109:
+        [[[UIAlertView alloc] initWithTitle:@"Status" message:@"Can't Find an Opponent" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
+        break;
+
+      case 200:
+        [User setGameId:[responseData objectForKey:@"game_id"]];
+        break;
+        
+      default:
+        [[[UIAlertView alloc] initWithTitle:@"Status" message:[responseData objectForKey:@"message"] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
+        break;
+    }
   }];
   
   [request setFailedBlock:^{
