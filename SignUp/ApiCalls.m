@@ -29,25 +29,34 @@
   [request setCompletionBlock:^{
     NSDictionary *responseData = [[JSONDecoder decoder] parseJSONData:weakRequest.responseData];
     NSLog(@"response: %@", responseData);
-    
-    if([[responseData objectForKey:@"code"] integerValue] == 106)
-    {
-      [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Email Already Exists" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupFailed" object:nil];
-      return;
-    }
+    int statusCode = [[responseData objectForKey:@"code"] integerValue];
+    switch (statusCode) {
+      case 106:
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Email Already Exists" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupFailed" object:nil];
+        break;
 
-    if([[responseData objectForKey:@"code"] integerValue] == 202)
-    {
-      [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Username Already Taken" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupFailed" object:nil];
-      return;
-    }
-
-    if([[responseData objectForKey:@"status"] isEqualToString:@"success"])
-    {
-      [User createUserWithDictionary:responseData];
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupSuccessful" object:nil];
+      case 202:
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Username Already Taken" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupFailed" object:nil];
+        break;
+        
+      case 300:
+      {
+        NSDictionary *fields = [responseData objectForKey:@"fields"];
+        NSString *message = [[fields objectForKey:@"email"] objectForKey:@"description"];
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupFailed" object:nil];
+      }
+        break;
+      
+      default:
+        if([[responseData objectForKey:@"status"] isEqualToString:@"success"])
+        {
+          [User createUserWithDictionary:responseData];
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"SignupSuccessful" object:nil];
+        }
+        break;
     }
     }];
   
