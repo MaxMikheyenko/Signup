@@ -57,7 +57,7 @@
 
 + (NSString*)APIURL
 {
-  return @"http://ec2-54-242-218-82.compute-1.aws.amazon.com";
+  return @"http://ec2-54-224-181-7.compute-1.amazonaws.com";
 }
 
 #pragma mark - Core Data Singletons
