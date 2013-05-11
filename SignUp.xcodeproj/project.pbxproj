@@ -120,9 +120,9 @@
 		6AD45DE9173DCCB500B4F493 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		6AD45DEA173DCCB500B4F493 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		6AD45DEC173DCDAB00B4F493 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		6AD45F6F173EC7D800B4F493 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = /Users/maxmikheyenko/Desktop/Signup/Reachability/Reachability.h; sourceTree = "<absolute>"; };
-		6AD45F70173EC7D800B4F493 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Reachability/Reachability.m; sourceTree = SOURCE_ROOT; };
-		6AD45F71173EC7D800B4F493 /* Reachability.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Reachability.podspec; path = Reachability/Reachability.podspec; sourceTree = SOURCE_ROOT; };
+		6AD45F6F173EC7D800B4F493 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		6AD45F70173EC7D800B4F493 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		6AD45F71173EC7D800B4F493 /* Reachability.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Reachability.podspec; sourceTree = "<group>"; };
 		6AD45F74173EC7EA00B4F493 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIAuthenticationDialog.h; path = "asi-http-request/Classes/ASIAuthenticationDialog.h"; sourceTree = SOURCE_ROOT; };
 		6AD45F75173EC7EA00B4F493 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASIAuthenticationDialog.m; path = "asi-http-request/Classes/ASIAuthenticationDialog.m"; sourceTree = SOURCE_ROOT; };
 		6AD45F76173EC7EA00B4F493 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = "asi-http-request/Classes/ASICacheDelegate.h"; sourceTree = SOURCE_ROOT; };
