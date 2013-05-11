@@ -26,7 +26,7 @@
     [appDelegate.managedObjectContext save:nil];
   }
     
-  User *user = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([self class]) inManagedObjectContext:nil];
+  User *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:appDelegate.managedObjectContext];
   
   user.userName = [userData objectForKey:@"user_name"];
   user.userId = [userData objectForKey:@"user_id"];

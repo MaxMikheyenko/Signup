@@ -89,7 +89,7 @@
 - (NSManagedObjectModel *)managedObjectModel
 {
   if (_managedObjectModel == nil) {
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"CapModel" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Model" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
   }
   
